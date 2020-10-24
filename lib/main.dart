@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'random_words.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main(){
   runApp(MyApp());
