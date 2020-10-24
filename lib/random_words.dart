@@ -48,10 +48,40 @@ class RandomWordsState extends State<RandomWords>{
     );
   }
 
+  void _pustSaved(){
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context){
+          final Iterable<ListTile> tiles = _savedWordPairs.map((WordPair pair){
+            return ListTile(
+              title: Text(pair.asPascalCase, style: GoogleFonts.lato(fontSize: 20.0),),
+            );
+          }); 
+
+          final List<Widget> divided = ListTile.divideTiles(
+            context: context,
+            tiles: tiles,
+            color: Colors.green[400]
+          ).toList();
+
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Favorite Words',style:GoogleFonts.oswald(fontSize: 30)),
+            ),
+            body: ListView(children: divided,),
+          );
+        }
+      )
+    );
+  }
+
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
         title: Text('WordPair Generator',style:GoogleFonts.oswald(fontSize: 30)),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.list), onPressed: _pustSaved)
+        ],
       ),
       body: _buildList(),
     );
